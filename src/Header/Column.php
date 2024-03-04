@@ -48,6 +48,23 @@ class Column
     /** @var bool|null */
     public $indexed = false;
 
+    /** @var array */
+    private $properties = [];
+
+    public function __set(string $property, $value): void
+    {
+        $this->properties[$property] = $value;
+    }
+
+    /**
+     * @param string $property
+     * @return mixed
+     */
+    public function __get(string $property)
+    {
+        return $this->properties[$property];
+    }
+
     public function __construct(array $properties = [])
     {
         foreach ($properties as $property => $value) {
